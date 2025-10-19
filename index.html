@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>🎀 اكتشف شخصيتك 🎀</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+      color: #333;
+      padding: 30px;
+      line-height: 1.8;
+      background-image: url('https://i.imgur.com/3ZzZzZz.png'); /* يمكنك تغيير الرابط لصورة خلفية مناسبة */
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    h2 {
+      text-align: center;
+      color: #c2186b;
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+    .question {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .question p {
+      font-weight: bold;
+      color: #d63384;
+    }
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-left: 10px;
+    }
+    button {
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background-color: #c2186b;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 2px dashed #d63384;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #444;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎀 لعبة اكتشف شخصيتك من اختياراتك 🎀</h1>
+  <h2>👧 إلى حبيبة (عبس) بمناسبة عيد ميلادك 🎉</h2>
+
+  <form id="quizForm">
+    <div class="question">
+      <p>1️⃣ لو كنتِ في فيلم، أي دور يناسبك؟</p>
+      <label><input type="radio" name="q1" value="A"> 👑 الأميرة الحالمة</label>
+      <label><input type="radio" name="q1" value="B"> 🕵️‍♀️ المحققة الذكية</label>
+      <label><input type="radio" name="q1" value="C"> 🎨 الفنانة الغريبة</label>
+      <label><input type="radio" name="q1" value="D"> 🧙‍♀️ الساحرة الطيبة</label>
+    </div>
+
+    <div class="question">
+      <p>2️⃣ كيف تقضين يومك المثالي؟</p>
+      <label><input type="radio" name="q2" value="A"> 🎮 ألعاب فيديو ومغامرات</label>
+      <label><input type="radio" name="q2" value="B"> 📚 قراءة رواية خيالية</label>
+      <label><input type="radio" name="q2" value="C"> 🎶 سماع موسيقى ورقص</label>
+      <label><input type="radio" name="q2" value="D"> 🛍️ تسوق مع صديقاتك</label>
+    </div>
+
+    <div class="question">
+      <p>3️⃣ لو عندك قوة خارقة، تختارين؟</p>
+      <label><input type="radio" name="q3" value="A"> ✨ الطيران</label>
+      <label><input type="radio" name="q3" value="B"> 🧠 قراءة الأفكار</label>
+      <label><input type="radio" name="q3" value="C"> 🔮 التحكم بالزمن</label>
+      <label><input type="radio" name="q3" value="D"> 💫 الشفاء السريع</label>
+    </div>
+
+    <div class="question">
+      <p>4️⃣ أي لون يعبر عنك أكثر؟</p>
+      <label><input type="radio" name="q4" value="A"> 💖 وردي</label>
+      <label><input type="radio" name="q4" value="B"> 💙 أزرق</label>
+      <label><input type="radio" name="q4" value="C"> 💛 أصفر</label>
+      <label><input type="radio" name="q4" value="D"> 🖤 أسود</label>
+    </div>
+
+    <div class="question">
+      <p>5️⃣ أي حيوان تحسين إنه يشبهك؟</p>
+      <label><input type="radio" name="q5" value="A"> 🐱 قطة</label>
+      <label><input type="radio" name="q5" value="B"> 🦉 بومة</label>
+      <label><input type="radio" name="q5" value="C"> 🐬 دولفين</label>
+      <label><input type="radio" name="q5" value="D"> 🐴 حصان</label>
+    </div>
+
+    <button type="button" onclick="showResult()">✨ اعرفي شخصيتك ✨</button>
+  </form>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    function showResult() {
+      const form = document.forms['quizForm'];
+      const answers = ['q1', 'q2', 'q3', 'q4', 'q5'].map(q => form[q]?.value);
+      if (answers.includes(undefined)) {
+        alert("جاوبي على كل الأسئلة أولاً 💡");
+        return;
+      }
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(a => counts[a]++);
+
+      let max = Math.max(...Object.values(counts));
+      let result = '';
+
+      if (counts.A === max) {
+        result = "✨ أنتِ شخصية حالمة، تحبين الجمال والهدوء، وتعيشين في عالمك الخاص المليء بالخيال.";
+      } else if (counts.B === max) {
+        result = "🧠 أنتِ ذكية ومركزة، تحبين التحليل وحل الألغاز، وعندك فضول دائم لاكتشاف الأشياء الجديدة.";
+      } else if (counts.C === max) {
+        result = "🎨 أنتِ مبدعة ومجنونة بطريقة حلوة! تحبين التعبير عن نفسك وتكرهين الروتين.";
+      } else {
+        result = "🌈 أنتِ طيبة القلب، تحبين مساعدة الآخرين، وعندك طاقة إيجابية تنور المكان اللي تكوني فيه.";
+      }
+
+      document.getElementById('resultBox').innerText = result;
+      document.getElementById('resultBox').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
